@@ -11,19 +11,18 @@ CFLAGS := ${FLAGS} -O3 -ffreestanding -fno-builtin
 ASFLAGS := ${FLAGS}
 LDFLAGS := ${FLAGS}
 
+OBJS := pe.o main.o zImage.o
+
 all: kexec.exe
 
-pe.o: pe.s
-	${AS} ${ASFLAGS} pe.s -o pe.o
+%.o: %.s
+	${AS} ${ASFLAGS} $< -o $@
 
-zImage.o: zImage.s
-	${AS} ${ASFLAGS} zImage.s -o zImage.o
+%.o: %.c
+	${CC} ${CFLAGS} -c $< -o $@
 
-main.o: main.c
-	${CC} ${CFLAGS} -c main.c -o main.o
-
-kexec.elf: pe.o main.o zImage.o
-	${LD} pe.o main.o zImage.o -o kexec.elf -T script.lds
+kexec.elf: ${OBJS} script.lds
+	${LD} ${OBJS} -o kexec.elf -T script.lds
 
 kexec.exe: kexec.elf
 	${OBJCOPY} -O binary kexec.elf kexec.exe
@@ -35,4 +34,4 @@ install: kexec.exe
 	umount /mnt/tmp
 
 clean:
-	rm -f kexec.exe pe.o main.o kexec.elf
+	rm -f kexec.exe kexec.elf ${OBJS}
