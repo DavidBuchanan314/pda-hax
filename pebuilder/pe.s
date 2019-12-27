@@ -85,7 +85,7 @@ opt_hdr:
 end_opt_hdr:
 
 sect_hdrs:
-	.ascii	".text\0\0\0" // Name
+	.ascii	".text\0\0\0"       // Name
 	.word	end_zimage-_start   // VirtualSize
 	.word	0x1000              // VirtualAddress
 	.word	end_zimage-_start   // SizeOfRawData

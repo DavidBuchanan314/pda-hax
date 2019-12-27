@@ -7,18 +7,20 @@ OBJCOPY = ${TOOLCHAIN}objcopy
 
 FLAGS := -march=armv5te
 
-CFLAGS := ${FLAGS} -O3 -ffreestanding -fno-builtin
+CFLAGS := ${FLAGS} -fPIC -fPIE -I./include -std=gnu99 -O3 -ffreestanding -Wall -Wextra
 ASFLAGS := ${FLAGS}
 LDFLAGS := ${FLAGS}
 
-OBJS := pe.o main.o zImage.o
+OBJS := pe.o main.o uart.o mmu.o string.o zImage.o
 
 all: kexec.exe
+
+zimage.o: zImage
 
 %.o: %.s
 	${AS} ${ASFLAGS} $< -o $@
 
-%.o: %.c
+%.o: %.c $(wildcard include/*.h)
 	${CC} ${CFLAGS} -c $< -o $@
 
 kexec.elf: ${OBJS} script.lds

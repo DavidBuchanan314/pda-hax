@@ -9,6 +9,7 @@ SECTIONS
 		*(.data)
 		*(.rodata)
 		*(.bss)
+		*(.got)
 		*(.zimage)
 	}
 }
