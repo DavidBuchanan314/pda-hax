@@ -13,29 +13,29 @@
 
 mz_hdr:
 
-	.ascii	"MZ"         // e_magic
-	.short	0            // e_cblp
-	.short	0            // e_cp
-	.short	0            // e_crlc
-	.short	0            // e_cparhdr
-	.short	0            // e_minalloc
-	.short	0            // e_maxalloc
-	.short	0            // e_ss
-	.short	0            // e_sp
-	.short	0            // e_csum
-	.short	0            // e_ip
-	.short	0            // e_cs
-	.short	0x40         // e_lsarlc
-	.short	0            // e_ovno
+	.ascii	"MZ"           // e_magic
+	.short	0              // e_cblp
+	.short	0              // e_cp
+	.short	0              // e_crlc
+	.short	0              // e_cparhdr
+	.short	0              // e_minalloc
+	.short	0              // e_maxalloc
+	.short	0              // e_ss
+	.short	0              // e_sp
+	.short	0              // e_csum
+	.short	0              // e_ip
+	.short	0              // e_cs
+	.short	0x40           // e_lsarlc
+	.short	0              // e_ovno
 	.rept	4
-	.short	0            // e_res
+	.short	0              // e_res
 	.endr
-	.short	0            // e_oemid
-	.short	0            // e_oeminfo
+	.short	0              // e_oemid
+	.short	0              // e_oeminfo
 	.rept	10
-	.short	0            // e_res2
+	.short	0              // e_res2
 	.endr
-	.word pe_hdr-mz_hdr  // e_lfanew
+	.word	pe_hdr-mz_hdr  // e_lfanew
 
 pe_hdr:
 	.ascii	"PE\0\0"             // PE signature
@@ -99,7 +99,7 @@ sect_hdrs:
 
 end_hdrs:
 
-.balign 0x1000
+.balign	0x1000
 
 _start:
 //	ldr	sp, =0x84080000

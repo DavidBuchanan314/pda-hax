@@ -29,7 +29,7 @@ void *mmu_wince_phys2virt(void *phys)
 	uint32_t p = (uint32_t)phys;
 
 	// sdram
-	if (p >= 0xA0000000 && p < 0xA8000000) return (void*)(p + 0x4000000);
+	if (p >= 0xA0000000 && p < 0xA8000000) return (void*)(p - 0x1c000000);
 
 	return PTR_INVALID;
 }

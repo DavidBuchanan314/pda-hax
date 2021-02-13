@@ -32,10 +32,11 @@ to contiguous physical memory.
 
 Solution:
 - Make a table of where all our pages are in physical memory
-- move any blocks out of the way of where our code needs relocating to
+- XXX: skip this step: move any blocks out of the way of where our code needs relocating to
 - copy our code there
 - jump to relocated code
 - relocate zimage
+
 
 
 
@@ -48,6 +49,18 @@ relocate image to contiguous SDRAM, careful not to clobber own code in the proce
 disable MMU and caches
 
 jump to zImage
+
+
+
+
+PLAN 3:
+
+- identity map sdram
+- copy code to sdram
+- jump to code in sdram
+- disable mmu
+- re-init UART for no-mmu
+
 */
 
 
